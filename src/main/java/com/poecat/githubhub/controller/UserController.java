@@ -1,13 +1,16 @@
 package com.poecat.githubhub.controller;
 
+import com.poecat.githubhub.errors.ErrorResponse;
 import com.poecat.githubhub.info.BranchInfo;
 import com.poecat.githubhub.info.RepositoryInfo;
 import org.kohsuke.github.GHBranch;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 
-    private static final String GITHUB_API_TOKEN = "YOUR_GITHUB_API_KEY";
+    private static final String GITHUB_API_TOKEN = "YOUR_GITHUB_API_TOKEN";
 
     @GetMapping(value = "/repositories/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getRepositories(@PathVariable String username,
@@ -47,10 +50,14 @@ public class UserController {
 
             return ResponseEntity.ok(result);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (HttpClientErrorException.NotAcceptable e) {
+            // Return 406 response for unsupported content type
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                    .body(new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(), "We only serve JSON here"));
+        } catch (HttpClientErrorException.NotFound | IOException e) {
+            // Return 404 response if the user does not exist
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), "User not found"));
         }
-
-
     }
 }
