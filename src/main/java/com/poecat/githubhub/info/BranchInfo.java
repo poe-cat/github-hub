@@ -1,20 +1,21 @@
 package com.poecat.githubhub.info;
 
 public class BranchInfo {
-    private String branchName;
+    private String name;
     private String lastCommitSha;
 
-    public BranchInfo(String branchName, String lastCommitSha) {
-        this.branchName = branchName;
+
+    public BranchInfo(String name, String lastCommitSha) {
+        this.name = name;
         this.lastCommitSha = lastCommitSha;
     }
 
-    public String getBranchName() {
-        return branchName;
+    public String getName() {
+        return name;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastCommitSha() {
@@ -23,13 +24,5 @@ public class BranchInfo {
 
     public void setLastCommitSha(String lastCommitSha) {
         this.lastCommitSha = lastCommitSha;
-    }
-
-    @Override
-    public String toString() {
-        return "BranchInfo{" +
-                "branchName='" + branchName + '\'' +
-                ", lastCommitSha='" + lastCommitSha + '\'' +
-                '}';
     }
 }
