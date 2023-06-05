@@ -1,5 +1,13 @@
 # GitHub Hub Application
 
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Running the application locally](#running-the-application-locally)
+* [Running tests locally](#running-tests-locally)
+
+
 ## General info
 
 The GitHub Hub application is a REST API that serves information about the repositories and their branches of a given GitHub user. It retrieves the data directly from GitHub using the GitHub API. The information served includes:
@@ -67,3 +75,27 @@ If you don't know how to obtain one, follow these steps: https://docs.github.com
    Replace `{username}` with the GitHub username that you want to fetch the repository information for.
 
 If the application runs successfully, you will see the JSON responses with the repository information when you hit the API endpoint. If the username does not exist or if the content type is not acceptable, an appropriate error message will be displayed.
+
+
+## Running Tests Locally
+
+To run the tests locally, follow the steps below:
+
+1. Ensure that you have a compatible development environment set up with the required dependencies for the project.
+2. Open your terminal or command prompt and navigate to the project's root directory.
+3. Before running the tests, build the project to ensure that all necessary dependencies are downloaded and the project is compiled:
+
+   ```
+   mvn clean install
+   ```
+
+This command will compile the source code, run any necessary build tasks, and download the required dependencies.
+After building the project, you can execute the tests using the following command:
+
+   ```
+   mvn test
+   ```
+
+This command will trigger the test execution using Maven's test runner. It will run all the test classes in the project, including the UserControllerTest class.
+
+Once the tests start running, you'll see the test progress and results in the console. Each test case will be displayed, along with its status (pass/fail) and any error messages or stack traces if applicable.
