@@ -20,7 +20,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 
+    private GitHub gitHub;
     private static final String GITHUB_API_TOKEN = "YOUR_GITHUB_API_TOKEN";
+
+    public UserController(GitHub gitHub) {
+        this.gitHub = gitHub;
+    }
 
     @GetMapping(value = "/repositories/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getRepositories(@PathVariable String username,
