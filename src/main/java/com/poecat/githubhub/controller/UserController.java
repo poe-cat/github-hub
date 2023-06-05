@@ -23,6 +23,9 @@ public class UserController {
     private GitHub gitHub;
     private static final String GITHUB_API_TOKEN = "YOUR_GITHUB_API_TOKEN";
 
+    public UserController() {
+    }
+
     public UserController(GitHub gitHub) {
         this.gitHub = gitHub;
     }
